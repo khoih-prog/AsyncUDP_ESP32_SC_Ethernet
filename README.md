@@ -34,7 +34,7 @@
   * [2. ESP32 ADCs functions](#2-esp32-adcs-functions)
   * [3. ESP32 WiFi uses ADC2 for WiFi functions](#3-esp32-wifi-uses-adc2-for-wifi-functions)
 * [HOWTO Setting up the Async UDP Client](#howto-setting-up-the-async-udp-client)
-* [How to connect W5500 or ENC28J60 to ESP32_S3](#How-to-connect-W5500-or-ENC28J60-to-ESP32_S3)
+* [How to connect W5500 or ENC28J60 to ESP32_S2/S3/C3](#How-to-connect-W5500-or-ENC28J60-to-ESP32_S2S3C3)
 * [Examples](#examples)
   * [ 1. AsyncUDPClient](examples/AsyncUDPClient)
   * [ 2. AsyncUdpNTPClient](examples/AsyncUdpNTPClient)
@@ -49,6 +49,8 @@
   * [2. AsyncUDPSendReceive on ESP32S3_DEV with ESP32_S3_W5500](#2-asyncudpsendreceive-on-ESP32S3_DEV-with-ESP32_S3_W5500)
   * [3. AsyncUdpNTPClient on ESP32S3_DEV with ESP32_S3_ENC28J60](#3-asyncudpntpclient-on-ESP32S3_DEV-with-ESP32_S3_ENC28J60)
   * [4. AsyncUDPSendReceive on ESP32S3_DEV with ESP32_S3_ENC28J60](#4-asyncudpsendreceive-on-ESP32S3_DEV-with-ESP32_S3_ENC28J60)
+  * [5. AsyncUdpNTPClient on ESP32C3_DEV with ESP32_C3_ENC28J60](#5-asyncudpntpclient-on-ESP32C3_DEV-with-ESP32_C3_ENC28J60)
+  * [6. AsyncUdpNTPClient on ESP32S2_DEV with ESP32_S2_W5500](#6-asyncudpntpclient-on-ESP32S2_DEV-with-ESP32_S2_W5500)
 * [Troubleshooting](#troubleshooting)
 * [Issues](#issues)
 * [TO DO](#to-do)
@@ -87,7 +89,11 @@ to apply the better and faster **asynchronous** feature of the **powerful** [Asy
 
 #### Currently supported Boards
 
-1. **ESP32_S3-based boards (ESP32S3_DEV, ESP32_S3_BOX, UM TINYS3, UM PROS3, UM FEATHERS3, etc.)** using `LwIP` W5500 or ENC28J60 Ethernet
+1. **ESP32_S3-based boards (ESP32S3_DEV, ESP32_S3_BOX, UM TINYS3, UM PROS3, UM FEATHERS3, etc.)**
+2. **ESP32-S2 (ESP32-S2 Saola, AI-Thinker ESP-12K, etc.)**
+3. **ESP32-C3 (ARDUINO_ESP32C3_DEV, etc.)**
+
+using `LwIP` W5500 or ENC28J60 Ethernet
 
 
 --- 
@@ -97,6 +103,22 @@ to apply the better and faster **asynchronous** feature of the **powerful** [Asy
 <p align="center">
     <img src="https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/raw/main/Images/ESP32S3_DEV.png">
 </p> 
+
+
+
+#### ESP32S2_DEV
+
+<p align="center">
+    <img src="https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/raw/main/Images/ESP32S2_DEV.png">
+</p> 
+
+
+#### ESP32C3_DEV
+
+<p align="center">
+    <img src="https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/raw/main/Images/ESP32_C3_DevKitC_02.png">
+</p> 
+
 
 ---
 
@@ -128,10 +150,7 @@ to apply the better and faster **asynchronous** feature of the **powerful** [Asy
 
 ### To-be Supported Boards
 
-#### 1. ESP32S2/C3 using LwIP ENC28J60 or W5500
-
-1. **ESP32-S2 (ESP32-S2 Saola, AI-Thinker ESP-12K, etc.)**
-2. **ESP32-C3 (ARDUINO_ESP32C3_DEV, etc.)**
+#### 1. New ESP32 using LwIP W5500 or ENC28J60 Ethernet
 
 
 ---
@@ -142,8 +161,8 @@ to apply the better and faster **asynchronous** feature of the **powerful** [Asy
 
  1. [`Arduino IDE 1.8.19+` for Arduino](https://www.arduino.cc/en/Main/Software)
  2. [`ESP32 Core 2.0.5+`](https://github.com/espressif/arduino-esp32) for ESP32-based boards. [![Latest release](https://img.shields.io/github/release/espressif/arduino-esp32.svg)](https://github.com/espressif/arduino-esp32/releases/latest/)
- 3. [`WebServer_ESP32_SC_W5500 library 1.0.1+`](https://github.com/khoih-prog/WebServer_ESP32_SC_W5500). To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebServer_ESP32_SC_W5500.svg?)](https://www.ardu-badge.com/WebServer_ESP32_SC_W5500)
- 4. [`WebServer_ESP32_SC_ENC library 1.0.0+`](https://github.com/khoih-prog/WebServer_ESP32_SC_ENC). To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebServer_ESP32_SC_ENC.svg?)](https://www.ardu-badge.com/WebServer_ESP32_SC_ENC)
+ 3. [`WebServer_ESP32_SC_W5500 library 1.2.0+`](https://github.com/khoih-prog/WebServer_ESP32_SC_W5500). To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebServer_ESP32_SC_W5500.svg?)](https://www.ardu-badge.com/WebServer_ESP32_SC_W5500)
+ 4. [`WebServer_ESP32_SC_ENC library 1.2.0+`](https://github.com/khoih-prog/WebServer_ESP32_SC_ENC). To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebServer_ESP32_SC_ENC.svg?)](https://www.ardu-badge.com/WebServer_ESP32_SC_ENC)
  
  
 ---
@@ -278,7 +297,7 @@ Look in file [**adc_common.c**](https://github.com/espressif/esp-idf/blob/master
 
 #if USING_W5500
 
-  // For W5500
+  // For ESP32_S3
   // Optional values to override default settings
   // Don't change unless you know what you're doing
   //#define ETH_SPI_HOST        SPI3_HOST
@@ -292,6 +311,20 @@ Look in file [**adc_common.c**](https://github.com/espressif/esp-idf/blob/master
   //#define SCK_GPIO            12
   //#define CS_GPIO             10
 
+  // For ESP32_C3
+  // Optional values to override default settings
+  // Don't change unless you know what you're doing
+  //#define ETH_SPI_HOST        SPI2_HOST
+  //#define SPI_CLOCK_MHZ       25
+  
+  // Must connect INT to GPIOxx or not working
+  //#define INT_GPIO            10
+  
+  //#define MISO_GPIO           5
+  //#define MOSI_GPIO           6
+  //#define SCK_GPIO            4
+  //#define CS_GPIO             7
+
   //////////////////////////////////////////////////////////
 
 #else   // #if USING_W5500
@@ -302,7 +335,7 @@ Look in file [**adc_common.c**](https://github.com/espressif/esp-idf/blob/master
 
   // Optional values to override default settings
   // Don't change unless you know what you're doing
-  //#define SPI_HOST            SPI2_HOST
+  //#define ETH_SPI_HOST        SPI2_HOST
   //#define SPI_CLOCK_MHZ       8
   
   // Must connect INT to GPIOxx or not working
@@ -515,7 +548,7 @@ void initEthernet()
 void initEthernet()
 {
   UDP_LOGWARN(F("Default SPI pinout:"));
-  UDP_LOGWARN1(F("SPI_HOST:"), SPI_HOST);
+  UDP_LOGWARN1(F("SPI_HOST:"), ETH_SPI_HOST);
   UDP_LOGWARN1(F("MOSI:"), MOSI_GPIO);
   UDP_LOGWARN1(F("MISO:"), MISO_GPIO);
   UDP_LOGWARN1(F("SCK:"),  SCK_GPIO);
@@ -535,8 +568,8 @@ void initEthernet()
 
   //bool begin(int MISO_GPIO, int MOSI_GPIO, int SCLK_GPIO, int CS_GPIO, int INT_GPIO, int SPI_CLOCK_MHZ,
   //           int SPI_HOST, uint8_t *ENC28J60_Mac = ENC28J60_Default_Mac);
-  //ETH.begin( MISO_GPIO, MOSI_GPIO, SCK_GPIO, CS_GPIO, INT_GPIO, SPI_CLOCK_MHZ, SPI_HOST );
-  ETH.begin( MISO_GPIO, MOSI_GPIO, SCK_GPIO, CS_GPIO, INT_GPIO, SPI_CLOCK_MHZ, SPI_HOST, mac[index] );
+  //ETH.begin( MISO_GPIO, MOSI_GPIO, SCK_GPIO, CS_GPIO, INT_GPIO, SPI_CLOCK_MHZ, ETH_SPI_HOST );
+  ETH.begin( MISO_GPIO, MOSI_GPIO, SCK_GPIO, CS_GPIO, INT_GPIO, SPI_CLOCK_MHZ, ETH_SPI_HOST, mac[index] );
 
   // Static IP, leave without this line to get IP via DHCP
   //bool config(IPAddress local_ip, IPAddress gateway, IPAddress subnet, IPAddress dns1 = 0, IPAddress dns2 = 0);
@@ -611,24 +644,8 @@ void loop()
 ---
 ---
 
-### How to connect W5500 or ENC28J60 to ESP32_S3
+### How to connect W5500 or ENC28J60 to ESP32_S2/S3/C3
 
-You can change the `INT` pin to another one. Default is `GPIO4`
-
-```cpp
-// Must connect INT to GPIOxx or not working
-#define INT_GPIO            4
-```
-
----
-
-#### ESP32S3_DEV
-
-<p align="center">
-    <img src="https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/raw/main/Images/ESP32S3_DEV.png">
-</p> 
-
----
 
 ##### W5500
 
@@ -656,6 +673,20 @@ You can change the `INT` pin to another one. Default is `GPIO4`
  
 ---
 
+
+#### ESP32S3_DEV
+
+<p align="center">
+    <img src="https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/raw/main/Images/ESP32S3_DEV.png">
+</p> 
+
+You can change the `INT` pin to another one. Default is `GPIO4`
+
+```cpp
+// Must connect INT to GPIOxx or not working
+#define INT_GPIO            4
+```
+
 |W5500 or ENC28J60|<--->|ESP32_S3|
 |:-:|:-:|:-:|
 |MOSI|<--->|GPIO11|
@@ -663,6 +694,63 @@ You can change the `INT` pin to another one. Default is `GPIO4`
 |SCK|<--->|GPIO12|
 |SS|<--->|GPIO10|
 |INT|<--->|GPIO4|
+|RST|<--->|RST|
+|GND|<--->|GND|
+|3.3V|<--->|3.3V|
+
+
+---
+
+#### ESP32S2_DEV
+
+
+<p align="center">
+    <img src="https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/raw/main/Images/ESP32S2_DEV.png">
+</p> 
+
+
+You can change the `INT` pin to another one. Default is `GPIO4`
+
+```cpp
+// Must connect INT to GPIOxx or not working
+#define INT_GPIO            4
+```
+
+|W5500 or ENC28J60|<--->|ESP32_S2|
+|:-:|:-:|:-:|
+|MOSI|<--->|GPIO35|
+|MISO|<--->|GPIO37|
+|SCK|<--->|GPIO36|
+|SS|<--->|GPIO34|
+|INT|<--->|GPIO4|
+|RST|<--->|RST|
+|GND|<--->|GND|
+|3.3V|<--->|3.3V|
+
+
+---
+
+#### ESP32C3_DEV
+
+<p align="center">
+    <img src="https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/raw/main/Images/ESP32_C3_DevKitC_02.png">
+</p> 
+
+
+You can change the `INT` pin to another one. Default is `GPIO4`
+
+```cpp
+// Must connect INT to GPIOxx or not working
+#define INT_GPIO            10
+```
+
+|W5500 or ENC28J60|<--->|ESP32_C3|
+|:-:|:-:|:-:|
+|MOSI|<--->|GPIO6|
+|MISO|<--->|GPIO5|
+|SCK|<--->|GPIO4|
+|SS|<--->|GPIO7|
+|INT|<--->|GPIO10|
 |RST|<--->|RST|
 |GND|<--->|GND|
 |3.3V|<--->|3.3V|
@@ -687,7 +775,7 @@ You can change the `INT` pin to another one. Default is `GPIO4`
 
 #### File [AsyncUdpNTPClient.ino](examples/AsyncUdpNTPClient/AsyncUdpNTPClient.ino)
 
-https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/blob/af4ba32cacd865c5ffc3da5bb653c085c9c25702/examples/AsyncUdpNTPClient/AsyncUdpNTPClient.ino#L11-L342
+https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/blob/1540dafc72a7596490d1ac9b8a3e77bdeb7df584/examples/AsyncUdpNTPClient/AsyncUdpNTPClient.ino#L11-L356
 
 ---
 
@@ -701,8 +789,8 @@ This is terminal debug output when running [AsyncUdpNTPClient](https://github.co
 
 ```cpp
 Start AsyncUdpNTPClient on ESP32S3_DEV with ESP32_S3_W5500
-WebServer_ESP32_SC_W5500 v1.0.1 for core v2.0.0+
-AsyncUDP_ESP32_SC_Ethernet v2.0.0 for core v2.0.0+
+WebServer_ESP32_SC_W5500 v1.2.0 for core v2.0.0+
+AsyncUDP_ESP32_SC_Ethernet v2.1.0 for core v2.0.0+
 [UDP] Default SPI pinout:
 [UDP] SPI_HOST: 2
 [UDP] MOSI: 11
@@ -749,8 +837,8 @@ This is terminal debug output when running [AsyncUDPSendReceive](https://github.
 
 ```cpp
 Start AsyncUDPSendReceive on ESP32S3_DEV with ESP32_S3_W5500
-WebServer_ESP32_SC_W5500 v1.0.1 for core v2.0.0+
-AsyncUDP_ESP32_SC_Ethernet v2.0.0 for core v2.0.0+
+WebServer_ESP32_SC_W5500 v1.2.0 for core v2.0.0+
+AsyncUDP_ESP32_SC_Ethernet v2.1.0 for core v2.0.0+
 
 [UDP] Default SPI pinout:
 [UDP] SPI_HOST: 2
@@ -790,8 +878,8 @@ This is terminal debug output when running [AsyncUdpNTPClient](https://github.co
 
 ```cpp
 Start AsyncUdpNTPClient on ESP32S3_DEV with ESP32_S3_ENC28J60
-WebServer_ESP32_SC_ENC v1.0.0 for core v2.0.0+
-AsyncUDP_ESP32_SC_Ethernet v2.0.0 for core v2.0.0+
+WebServer_ESP32_SC_ENC v1.2.0 for core v2.0.0+
+AsyncUDP_ESP32_SC_Ethernet v2.1.0 for core v2.0.0+
 [UDP] Default SPI pinout:
 [UDP] SPI_HOST: 1
 [UDP] MOSI: 11
@@ -826,8 +914,8 @@ This is terminal debug output when running [AsyncUDPSendReceive](https://github.
 
 ```cpp
 Start AsyncUDPSendReceive on ESP32S3_DEV with ESP32_S3_ENC28J60
-WebServer_ESP32_SC_ENC v1.0.0 for core v2.0.0+
-AsyncUDP_ESP32_SC_Ethernet v2.0.0 for core v2.0.0+
+WebServer_ESP32_SC_ENC v1.2.0 for core v2.0.0+
+AsyncUDP_ESP32_SC_Ethernet v2.1.0 for core v2.0.0+
 [UDP] Default SPI pinout:
 [UDP] SPI_HOST: 1
 [UDP] MOSI: 11
@@ -860,6 +948,96 @@ Seconds since Jan 1 1900 = 3880397612
 Epoch/Unix time = 1671408812
 The UTC/GMT time is Mon 2022-12-19 00:13:32 GMT
 ============= sendACKPacket =============
+```
+
+
+---
+
+
+#### 5. AsyncUdpNTPClient on ESP32C3_DEV with ESP32_C3_ENC28J60
+
+This is terminal debug output when running [AsyncUdpNTPClient](https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/tree/main/examples/AsyncUdpNTPClient) on  **ESP32_C3_ENC28J60 (ESP32C3_DEV + ENC28J60)**. It connects to NTP Server using `AsyncUDP_ESP32_SC_Ethernet` library, and requests NTP time every 60s. The packet is then **received and processed asynchronously** to print current UTC/GMT time.
+
+##### Connect to NTP server 0.ca.pool.ntp.org (IP=208.81.1.244)
+
+```cpp
+Start AsyncUdpNTPClient on ESP32C3_DEV with ESP32_C3_ENC28J60
+WebServer_ESP32_SC_ENC v1.2.0 for core v2.0.0+
+AsyncUDP_ESP32_SC_Ethernet v2.1.0 for core v2.0.0+
+[UDP] Default SPI pinout:
+[UDP] SPI_HOST: 1
+[UDP] MOSI: 6
+[UDP] MISO: 5
+[UDP] SCK: 4
+[UDP] CS: 7
+[UDP] INT: 10
+[UDP] SPI Clock (MHz): 8
+[UDP] =========================
+Using built-in mac_eth = 7C:DF:A1:DA:66:87
+
+ETH Started
+ETH Connected
+ETH MAC: 7C:DF:A1:DA:66:87, IPv4: 192.168.2.136
+FULL_DUPLEX, 10Mbps
+AsyncUdpNTPClient started @ IP address: 192.168.2.136
+UDP connected
+============= createNTPpacket =============
+Received UDP Packet Type: Unicast
+From: 208.81.1.244:123, To: 192.168.2.136:60970, Length: 48
+Seconds since Jan 1 1900 = 3880661204
+Epoch/Unix time = 1671672404
+The UTC/GMT time is Thu 2022-12-22 01:26:44 GMT
+============= createNTPpacket =============
+Received UDP Packet Type: Unicast
+From: 208.81.1.244:123, To: 192.168.2.136:60970, Length: 48
+Seconds since Jan 1 1900 = 3880661264
+Epoch/Unix time = 1671672464
+The UTC/GMT time is Thu 2022-12-22 01:27:44 GMT
+```
+
+
+---
+
+
+#### 6. AsyncUdpNTPClient on ESP32S2_DEV with ESP32_S2_W5500
+
+This is terminal debug output when running [AsyncUdpNTPClient](https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/tree/main/examples/AsyncUdpNTPClient) on  **ESP32_S2_W5500 (ESP32S2_DEV + W5500)**. It connects to NTP Server using `AsyncUDP_ESP32_SC_Ethernet` library, and requests NTP time every 60s. The packet is then **received and processed asynchronously** to print current UTC/GMT time.
+
+##### Connect to NTP server 0.ca.pool.ntp.org (IP=208.81.1.244)
+
+```cpp
+Start AsyncUdpNTPClient on ESP32S2_DEV with ESP32_S2_W5500
+WebServer_ESP32_SC_W5500 v1.2.0 for core v2.0.0+
+AsyncUDP_ESP32_SC_Ethernet v2.1.0 for core v2.0.0+
+[UDP] Default SPI pinout:
+[UDP] SPI_HOST: 2
+[UDP] MOSI: 35
+[UDP] MISO: 37
+[UDP] SCK: 36
+[UDP] CS: 34
+[UDP] INT: 4
+[UDP] SPI Clock (MHz): 25
+[UDP] =========================
+Using built-in mac_eth = 7E:DF:A1:08:32:C9
+
+ETH Started
+ETH Connected
+ETH MAC: 7E:DF:A1:08:32:C9, IPv4: 192.168.2.133
+FULL_DUPLEX, 100Mbps
+AsyncUdpNTPClient started @ IP address: 192.168.2.133
+UDP connected
+============= createNTPpacket =============
+Received UDP Packet Type: Unicast
+From: 208.81.1.244:123, To: 192.168.2.133:53072, Length: 48
+Seconds since Jan 1 1900 = 3880661469
+Epoch/Unix time = 1671672669
+The UTC/GMT time is Thu 2022-12-22 01:31:09 GMT
+============= createNTPpacket =============
+Received UDP Packet Type: Unicast
+From: 208.81.1.244:123, To: 192.168.2.133:53072, Length: 48
+Seconds since Jan 1 1900 = 3880661529
+Epoch/Unix time = 1671672729
+The UTC/GMT time is Thu 2022-12-22 01:32:09 GMT
 ```
 
 
@@ -909,14 +1087,13 @@ Submit issues to: [AsyncUDP_ESP32_SC_Ethernet issues](https://github.com/khoih-p
 
  1. Fix bug. Add enhancement
  2. Add support to more `LwIP Ethernet` shields
- 3. Add support to more boards `ESP32_S2` and `ESP32_C3`
 
 
 ## DONE
 
  1. Initial port to `ESP32_S3` boards using `LwIP W5500 or ENC28J60 Ethernet`
  2. Use `allman astyle` and add `utils`. Restyle the library
- 
+ 3. Add support to `ESP32_S2` and `ESP32_C3` using `LwIP W5500 or ENC28J60 Ethernet`
  
 ---
 ---
