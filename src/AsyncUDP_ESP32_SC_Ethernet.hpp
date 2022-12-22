@@ -7,11 +7,12 @@
   Built by Khoi Hoang https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet
   Licensed under GPLv3 license
 
-  Version: 2.0.0
+  Version: 2.1.0
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   2.0.0   K Hoang      18/12/2022 Initial coding for ESP32_S3 using LwIP W5500 / ENC28J60. Bump up version to v2.0.0
+  2.1.0   K Hoang      21/12/2022 Add support to ESP32_S2/C3 using LwIP W5500 / ENC28J60 Ethernet
  *****************************************************************************************************************************/
 
 #pragma once
@@ -30,9 +31,9 @@
   #endif
   
   #define USING_ESP32_S2        true
-  
-  #error ESP32_S2 not supported yet
-  
+
+////////////////////////////////////////
+ 
 #elif ( ARDUINO_ESP32C3_DEV )
   #if (_ASYNC_UDP_ESP32_SC_ETHERNET_LOGLEVEL_ > 3)
     #if ( defined(ESP_ARDUINO_VERSION_MAJOR) && (ESP_ARDUINO_VERSION_MAJOR >= 2) )
@@ -46,9 +47,9 @@
   #endif
   
   #define USING_ESP32_C3        true
-  
-  #error ESP32_C3 not supported yet
-  
+
+////////////////////////////////////////
+    
 #elif ( defined(ARDUINO_ESP32S3_DEV) || defined(ARDUINO_ESP32_S3_BOX) || defined(ARDUINO_TINYS3) || \
         defined(ARDUINO_PROS3) || defined(ARDUINO_FEATHERS3) )
  
@@ -64,8 +65,9 @@
 	#error This code is intended to run on the ESP32_S2/3, ESP32_C3 platform! Please check your Tools->Board setting.
 #endif
 
-#define BOARD_NAME      ARDUINO_BOARD
+/////////////////////////////////////////////////
 
+#define BOARD_NAME      ARDUINO_BOARD
 
 /////////////////////////////////////////////////
 
@@ -75,7 +77,7 @@
 		#warning Using code for ESP32 core v2.0.0+ in AsyncUDP_ESP32_SC_Ethernet.h
 	#endif
 
-	#define ASYNC_UDP_ESP32_SC_ETHERNET_VERSION      "AsyncUDP_ESP32_SC_Ethernet v2.0.0 for core v2.0.0+"
+	#define ASYNC_UDP_ESP32_SC_ETHERNET_VERSION      "AsyncUDP_ESP32_SC_Ethernet v2.1.0 for core v2.0.0+"
 
 	extern "C"
 	{
@@ -90,7 +92,7 @@
 		#warning Using code for ESP32 core v1.0.6- in AsyncUDP_ESP32_SC_Ethernet.h
 	#endif
 
-	#define ASYNC_UDP_ESP32_SC_ETHERNET_VERSION      "AsyncUDP_ESP32_SC_Ethernet v2.0.0 for core v1.0.6-"
+	#define ASYNC_UDP_ESP32_SC_ETHERNET_VERSION      "AsyncUDP_ESP32_SC_Ethernet v2.1.0 for core v1.0.6-"
 
 	extern "C"
 	{

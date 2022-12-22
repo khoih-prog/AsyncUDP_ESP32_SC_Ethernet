@@ -34,7 +34,7 @@
 
 #if USING_W5500
 
-  // For W5500
+  // For ESP32_S3
   // Optional values to override default settings
   // Don't change unless you know what you're doing
   //#define ETH_SPI_HOST        SPI3_HOST
@@ -48,6 +48,20 @@
   //#define SCK_GPIO            12
   //#define CS_GPIO             10
 
+  // For ESP32_C3
+  // Optional values to override default settings
+  // Don't change unless you know what you're doing
+  //#define ETH_SPI_HOST        SPI2_HOST
+  //#define SPI_CLOCK_MHZ       25
+  
+  // Must connect INT to GPIOxx or not working
+  //#define INT_GPIO            10
+  
+  //#define MISO_GPIO           5
+  //#define MOSI_GPIO           6
+  //#define SCK_GPIO            4
+  //#define CS_GPIO             7
+
   //////////////////////////////////////////////////////////
 
 #else   // #if USING_W5500
@@ -57,7 +71,7 @@
   // For ENC28J60
   // Optional values to override default settings
   // Don't change unless you know what you're doing
-  //#define ETH_SPI_HOST        SPI3_HOST
+  //#define ETH_SPI_HOST        SPI2_HOST
   //#define SPI_CLOCK_MHZ       8
   
   // Must connect INT to GPIOxx or not working
