@@ -1,6 +1,6 @@
 /****************************************************************************************************************************
   multiFileProject.ino
-  AsyncUDP_ESP32_SC_Ethernet is a Async UDP library for the ESP32_SC_Ethernet (ESP32S2/S3/C3 + LwIP W5500 / ENC28J60)
+  AsyncUDP_ESP32_SC_Ethernet is a Async UDP library for the ESP32_SC_Ethernet (ESP32S2/S3/C3 + LwIP W5500 / W6100 / ENC28J60)
 
   Based on and modified from ESPAsyncUDP Library (https://github.com/me-no-dev/ESPAsyncUDP)
   Built by Khoi Hoang https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet
@@ -22,8 +22,6 @@ IPAddress mySN(255, 255, 255, 0);
 // Google DNS Server IP
 IPAddress myDNS(8, 8, 8, 8);
 
-#if USING_W5500
-
 void initEthernet()
 {
   UDP_LOGWARN(F("Default SPI pinout:"));
@@ -39,54 +37,23 @@ void initEthernet()
   ///////////////////////////////////
 
   // To be called before ETH.begin()
-  ESP32_W5500_onEvent();
+  ESP32_Ethernet_onEvent();
 
+  // start the ethernet connection and the server:
+  // Use DHCP dynamic IP and random mac
   //bool begin(int MISO_GPIO, int MOSI_GPIO, int SCLK_GPIO, int CS_GPIO, int INT_GPIO, int SPI_CLOCK_MHZ,
-  //           int SPI_HOST, uint8_t *W5500_Mac = W5500_Default_Mac);
+  //           int SPI_HOST, uint8_t *W6100_Mac = W6100_Default_Mac);
   ETH.begin( MISO_GPIO, MOSI_GPIO, SCK_GPIO, CS_GPIO, INT_GPIO, SPI_CLOCK_MHZ, ETH_SPI_HOST );
+  //ETH.begin( MISO_GPIO, MOSI_GPIO, SCK_GPIO, CS_GPIO, INT_GPIO, SPI_CLOCK_MHZ, ETH_SPI_HOST, mac[millis() % NUMBER_OF_MAC] );
 
   // Static IP, leave without this line to get IP via DHCP
   //bool config(IPAddress local_ip, IPAddress gateway, IPAddress subnet, IPAddress dns1 = 0, IPAddress dns2 = 0);
-  ETH.config(myIP, myGW, mySN, myDNS);
+  //ETH.config(myIP, myGW, mySN, myDNS);
 
-  ESP32_W5500_waitForConnect();
-
-  ///////////////////////////////////
-}
-
-#else
-
-void initEthernet()
-{
-  UDP_LOGWARN(F("Default SPI pinout:"));
-  UDP_LOGWARN1(F("SPI_HOST:"), ETH_SPI_HOST);
-  UDP_LOGWARN1(F("MOSI:"), MOSI_GPIO);
-  UDP_LOGWARN1(F("MISO:"), MISO_GPIO);
-  UDP_LOGWARN1(F("SCK:"),  SCK_GPIO);
-  UDP_LOGWARN1(F("CS:"),   CS_GPIO);
-  UDP_LOGWARN1(F("INT:"),  INT_GPIO);
-  UDP_LOGWARN1(F("SPI Clock (MHz):"), SPI_CLOCK_MHZ);
-  UDP_LOGWARN(F("========================="));
-
-  ///////////////////////////////////
-
-  // To be called before ETH.begin()
-  ESP32_ENC_onEvent();
-
-  //bool begin(int MISO_GPIO, int MOSI_GPIO, int SCLK_GPIO, int CS_GPIO, int INT_GPIO, int SPI_CLOCK_MHZ,
-  //           int SPI_HOST, uint8_t *ENC28J60_Mac = ENC28J60_Default_Mac);
-  ETH.begin( MISO_GPIO, MOSI_GPIO, SCK_GPIO, CS_GPIO, INT_GPIO, SPI_CLOCK_MHZ, ETH_SPI_HOST );
-
-  // Static IP, leave without this line to get IP via DHCP
-  //bool config(IPAddress local_ip, IPAddress gateway, IPAddress subnet, IPAddress dns1 = 0, IPAddress dns2 = 0);
-  ETH.config(myIP, myGW, mySN, myDNS);
-
-  ESP32_ENC_waitForConnect();
+  ESP32_Ethernet_waitForConnect();
 
   ///////////////////////////////////
 }
-
-#endif
 
 ////////////////////////////////////
 
@@ -105,6 +72,8 @@ void setup()
 
 #if USING_W5500
   Serial.println(WEBSERVER_ESP32_SC_W5500_VERSION);
+#elif USING_W6100
+  Serial.println(WEBSERVER_ESP32_SC_W6100_VERSION);  
 #else
   Serial.println(WEBSERVER_ESP32_SC_ENC_VERSION);
 #endif
