@@ -34,7 +34,7 @@
   * [2. ESP32 ADCs functions](#2-esp32-adcs-functions)
   * [3. ESP32 WiFi uses ADC2 for WiFi functions](#3-esp32-wifi-uses-adc2-for-wifi-functions)
 * [HOWTO Setting up the Async UDP Client](#howto-setting-up-the-async-udp-client)
-* [How to connect W5500 or ENC28J60 to ESP32_S2/S3/C3](#How-to-connect-W5500-or-ENC28J60-to-ESP32_S2S3C3)
+* [How to connect W5500, W6100 or ENC28J60 to ESP32_S2/S3/C3](#How-to-connect-W5500-W6100-or-ENC28J60-to-ESP32_S2S3C3)
 * [Examples](#examples)
   * [ 1. AsyncUDPClient](examples/AsyncUDPClient)
   * [ 2. AsyncUdpNTPClient](examples/AsyncUdpNTPClient)
@@ -45,12 +45,13 @@
 * [Example AsyncUdpNTPClient](#example-asyncudpntpclient)
   * [File AsyncUdpNTPClient.ino](#file-asyncudpntpclientino)
 * [Debug Terminal Output Samples](#debug-terminal-output-samples)
-  * [1. AsyncUdpNTPClient on ESP32S3_DEV with ESP32_S3_W5500](#1-asyncudpntpclient-on-ESP32S3_DEV-with-ESP32_S3_W5500)
-  * [2. AsyncUDPSendReceive on ESP32S3_DEV with ESP32_S3_W5500](#2-asyncudpsendreceive-on-ESP32S3_DEV-with-ESP32_S3_W5500)
-  * [3. AsyncUdpNTPClient on ESP32S3_DEV with ESP32_S3_ENC28J60](#3-asyncudpntpclient-on-ESP32S3_DEV-with-ESP32_S3_ENC28J60)
-  * [4. AsyncUDPSendReceive on ESP32S3_DEV with ESP32_S3_ENC28J60](#4-asyncudpsendreceive-on-ESP32S3_DEV-with-ESP32_S3_ENC28J60)
-  * [5. AsyncUdpNTPClient on ESP32C3_DEV with ESP32_C3_ENC28J60](#5-asyncudpntpclient-on-ESP32C3_DEV-with-ESP32_C3_ENC28J60)
-  * [6. AsyncUdpNTPClient on ESP32S2_DEV with ESP32_S2_W5500](#6-asyncudpntpclient-on-ESP32S2_DEV-with-ESP32_S2_W5500)
+  * [1. AsyncUdpNTPClient on ESP32S3_DEV with ESP32_S3_W5500](#1-AsyncUdpNTPClient-on-ESP32S3_DEV-with-ESP32_S3_W5500)
+  * [2. AsyncUDPSendReceive on ESP32S3_DEV with ESP32_S3_W5500](#2-AsyncUDPSendReceive-on-ESP32S3_DEV-with-ESP32_S3_W5500)
+  * [3. AsyncUdpNTPClient on ESP32S3_DEV with ESP32_S3_ENC28J60](#3-AsyncUdpNTPClient-on-ESP32S3_DEV-with-ESP32_S3_ENC28J60)
+  * [4. AsyncUDPSendReceive on ESP32S3_DEV with ESP32_S3_ENC28J60](#4-AsyncUDPSendReceive-on-ESP32S3_DEV-with-ESP32_S3_ENC28J60)
+  * [5. AsyncUdpNTPClient on ESP32C3_DEV with ESP32_C3_ENC28J60](#5-AsyncUdpNTPClient-on-ESP32C3_DEV-with-ESP32_C3_ENC28J60)
+  * [6. AsyncUdpNTPClient on ESP32S2_DEV with ESP32_S2_W5500](#6-AsyncUdpNTPClient-on-ESP32S2_DEV-with-ESP32_S2_W5500)
+  * [7. AsyncUdpNTPClient on ESP32S2_DEV with ESP32_S2_W6100](#7-AsyncUdpNTPClient-on-ESP32S2_DEV-with-ESP32_S2_W6100)
 * [Troubleshooting](#troubleshooting)
 * [Issues](#issues)
 * [TO DO](#to-do)
@@ -68,13 +69,13 @@
 
 #### Features
 
-This [AsyncUDP_ESP32_SC_Ethernet library](https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet) is a fully **asynchronous UDP library**, designed for a trouble-free, multi-connection network environment, for `ESP32_S2/S3/C3` boards using `LwIP` W5500 or ENC28J60 Ethernet. The library is easy to use and includes support for `Unicast`, `Broadcast` and `Multicast` environments.
+This [AsyncUDP_ESP32_SC_Ethernet library](https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet) is a fully **asynchronous UDP library**, designed for a trouble-free, multi-connection network environment, for `ESP32_S2/S3/C3` boards using `LwIP` W5500, W6100 or ENC28J60 Ethernet. The library is easy to use and includes support for `Unicast`, `Broadcast` and `Multicast` environments.
 
 This library is based on, modified from:
 
 1. [Hristo Gochkov's AsyncUDP](https://github.com/espressif/arduino-esp32/tree/master/libraries/AsyncUDP)
 
-to apply the better and faster **asynchronous** feature of the **powerful** [AsyncUDP](https://github.com/espressif/arduino-esp32/tree/master/libraries/AsyncUDP) into `ESP32_S2/S3/C3` boards using `LwIP` W5500 or ENC28J60 Ethernet.
+to apply the better and faster **asynchronous** feature of the **powerful** [AsyncUDP](https://github.com/espressif/arduino-esp32/tree/master/libraries/AsyncUDP) into `ESP32_S2/S3/C3` boards using `LwIP` W5500, W6100 or ENC28J60 Ethernet.
 
 
 #### Why Async is better
@@ -93,7 +94,7 @@ to apply the better and faster **asynchronous** feature of the **powerful** [Asy
 2. **ESP32-S2 (ESP32-S2 Saola, AI-Thinker ESP-12K, etc.)**
 3. **ESP32-C3 (ARDUINO_ESP32C3_DEV, etc.)**
 
-using `LwIP` W5500 or ENC28J60 Ethernet
+using `LwIP` W5500, W6100 or ENC28J60 Ethernet
 
 
 --- 
@@ -132,8 +133,19 @@ using `LwIP` W5500 or ENC28J60 Ethernet
 
 <p align="center">
     <img src="https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/raw/main/Images/W5500_small.png">
-</p> 
- 
+</p>
+
+
+---
+
+##### W6100
+
+`FULL_DUPLEX, 100Mbps`
+
+<p align="center">
+    <img src="https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/raw/main/Images/W6100.png">
+</p>
+
 ---
 
 
@@ -150,7 +162,7 @@ using `LwIP` W5500 or ENC28J60 Ethernet
 
 ### To-be Supported Boards
 
-#### 1. New ESP32 using LwIP W5500 or ENC28J60 Ethernet
+#### 1. New ESP32 using LwIP W5500, W6100 or ENC28J60 Ethernet
 
 
 ---
@@ -273,378 +285,12 @@ Look in file [**adc_common.c**](https://github.com/espressif/esp-idf/blob/master
 
 ## HOWTO Setting up the Async UDP Client
 
-```cpp
-#if !( defined(ESP32) )
-  #error This code is designed for (ESP32S2/S3/C3 + LwIP W5500 or ENC28J60) to run on ESP32 platform! Please check your Tools->Board setting.
-#endif
-
-#include <Arduino.h>
-
-#define USING_W5500           true
-#define USING_ENC28J60        false
-
-#if !USING_W5500 && !USING_ENC28J60
-  #undef USING_W5500
-  #define USING_W5500           true
-#endif
-
-#define ASYNC_UDP_ESP32_SC_ETHERNET_DEBUG_PORT      Serial
-
-// Use from 0 to 4. Higher number, more debugging messages and memory usage.
-#define _ASYNC_UDP_ESP32_SC_ETHERNET_LOGLEVEL_      2
-
-//////////////////////////////////////////////////////////
-
-#if USING_W5500
-
-  // For ESP32_S3
-  // Optional values to override default settings
-  // Don't change unless you know what you're doing
-  //#define ETH_SPI_HOST        SPI3_HOST
-  //#define SPI_CLOCK_MHZ       25
-  
-  // Must connect INT to GPIOxx or not working
-  //#define INT_GPIO            4
-  
-  //#define MISO_GPIO           13
-  //#define MOSI_GPIO           11
-  //#define SCK_GPIO            12
-  //#define CS_GPIO             10
-
-  // For ESP32_C3
-  // Optional values to override default settings
-  // Don't change unless you know what you're doing
-  //#define ETH_SPI_HOST        SPI2_HOST
-  //#define SPI_CLOCK_MHZ       25
-  
-  // Must connect INT to GPIOxx or not working
-  //#define INT_GPIO            10
-  
-  //#define MISO_GPIO           5
-  //#define MOSI_GPIO           6
-  //#define SCK_GPIO            4
-  //#define CS_GPIO             7
-
-  //////////////////////////////////////////////////////////
-
-#else   // #if USING_W5500
-
-  //////////////////////////////////////////////////////////
-
-  // For ENC28J60
-
-  // Optional values to override default settings
-  // Don't change unless you know what you're doing
-  //#define ETH_SPI_HOST        SPI2_HOST
-  //#define SPI_CLOCK_MHZ       8
-  
-  // Must connect INT to GPIOxx or not working
-  //#define INT_GPIO            4
-  
-  //#define MISO_GPIO           13
-  //#define MOSI_GPIO           11
-  //#define SCK_GPIO            12
-  //#define CS_GPIO             10
-
-  //////////////////////////////////////////////////////////
-
-#endif    // #if USING_W5500
-
-//////////////////////////////////////////////////////////
-
-#include <AsyncUDP_ESP32_SC_Ethernet.h>
-
-/////////////////////////////////////////////
-
-// Enter a MAC address and IP address for your controller below.
-#define NUMBER_OF_MAC      20
-
-byte mac[][NUMBER_OF_MAC] =
-{
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x01 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x02 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x03 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x04 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x05 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x06 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x07 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x08 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x09 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x0A },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x0B },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x0C },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x0D },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x0E },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x0F },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x10 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x11 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x12 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x13 },
-  { 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x14 },
-};
-
-// Select the IP address according to your local network
-IPAddress myIP(192, 168, 2, 232);
-IPAddress myGW(192, 168, 2, 1);
-IPAddress mySN(255, 255, 255, 0);
-
-// Google DNS Server IP
-IPAddress myDNS(8, 8, 8, 8);
-
-/////////////////////////////////////////////
-
-#include <time.h>
-
-// 0.ca.pool.ntp.org
-IPAddress timeServerIP = IPAddress(208, 81, 1, 244);
-// time.nist.gov
-//IPAddress timeServerIP = IPAddress(132, 163, 96, 1);
-
-#define NTP_REQUEST_PORT      123
-
-char ReplyBuffer[] = "ACK";      // a string to send back
-
-char timeServer[]         = "time.nist.gov";  // NTP server
-
-const int NTP_PACKET_SIZE = 48;       // NTP timestamp is in the first 48 bytes of the message
-
-byte packetBuffer[NTP_PACKET_SIZE];   // buffer to hold incoming and outgoing packets
-
-// A UDP instance to let us send and receive packets over UDP
-AsyncUDP Udp;
-
-void sendACKPacket(void)
-{
-  Serial.println("============= sendACKPacket =============");
-
-  // Send unicast ACK to the same remoteIP and remotePort we received the packet
-  // The AsyncUDP_STM32 library will take care of the correct IP and port based on pcb
-  Udp.write((uint8_t *) ReplyBuffer, sizeof(ReplyBuffer));
-}
-
-// send an NTP request to the time server at the given address
-void createNTPpacket(void)
-{
-  Serial.println("============= createNTPpacket =============");
-
-  // set all bytes in the buffer to 0
-  memset(packetBuffer, 0, NTP_PACKET_SIZE);
-  // Initialize values needed to form NTP request
-  // (see URL above for details on the packets)
-
-  packetBuffer[0]   = 0b11100011;   // LI, Version, Mode
-  packetBuffer[1]   = 0;     // Stratum, or type of clock
-  packetBuffer[2]   = 6;     // Polling Interval
-  packetBuffer[3]   = 0xEC;  // Peer Clock Precision
-
-  // 8 bytes of zero for Root Delay & Root Dispersion
-  packetBuffer[12]  = 49;
-  packetBuffer[13]  = 0x4E;
-  packetBuffer[14]  = 49;
-  packetBuffer[15]  = 52;
-}
-
-void sendNTPPacket(void)
-{
-  createNTPpacket();
-  //Send unicast
-  Udp.write(packetBuffer, sizeof(packetBuffer));
-}
-
-void parsePacket(AsyncUDPPacket packet)
-{
-  struct tm  ts;
-  char       buf[80];
-
-  memcpy(packetBuffer, packet.data(), sizeof(packetBuffer));
-
-  Serial.print("Received UDP Packet Type: ");
-  Serial.println(packet.isBroadcast() ? "Broadcast" : packet.isMulticast() ? "Multicast" : "Unicast");
-  Serial.print("From: ");
-  Serial.print(packet.remoteIP());
-  Serial.print(":");
-  Serial.print(packet.remotePort());
-  Serial.print(", To: ");
-  Serial.print(packet.localIP());
-  Serial.print(":");
-  Serial.print(packet.localPort());
-  Serial.print(", Length: ");
-  Serial.print(packet.length());
-  Serial.println();
-
-  unsigned long highWord = word(packetBuffer[40], packetBuffer[41]);
-  unsigned long lowWord = word(packetBuffer[42], packetBuffer[43]);
-
-  // combine the four bytes (two words) into a long integer
-  // this is NTP time (seconds since Jan 1 1900):
-  unsigned long secsSince1900 = highWord << 16 | lowWord;
-
-  Serial.print(F("Seconds since Jan 1 1900 = "));
-  Serial.println(secsSince1900);
-
-  // now convert NTP time into )everyday time:
-  Serial.print(F("Epoch/Unix time = "));
-
-  // Unix time starts on Jan 1 1970. In seconds, that's 2208988800:
-  const unsigned long seventyYears = 2208988800UL;
-
-  // subtract seventy years:
-  unsigned long epoch = secsSince1900 - seventyYears;
-  time_t epoch_t = epoch;   //secsSince1900 - seventyYears;
-
-  // print Unix time:
-  Serial.println(epoch);
-
-  // print the hour, minute and second:
-  Serial.print(F("The UTC/GMT time is "));       // UTC is the time at Greenwich Meridian (GMT)
-
-  ts = *localtime(&epoch_t);
-  strftime(buf, sizeof(buf), "%a %Y-%m-%d %H:%M:%S %Z", &ts);
-  Serial.println(buf);
-
-  // send a reply, to the IP address and port that sent us the packet we received
-  sendACKPacket();
-}
-
-#if USING_W5500
-
-void initEthernet()
-{
-  UDP_LOGWARN(F("Default SPI pinout:"));
-  UDP_LOGWARN1(F("SPI_HOST:"), ETH_SPI_HOST);
-  UDP_LOGWARN1(F("MOSI:"), MOSI_GPIO);
-  UDP_LOGWARN1(F("MISO:"), MISO_GPIO);
-  UDP_LOGWARN1(F("SCK:"),  SCK_GPIO);
-  UDP_LOGWARN1(F("CS:"),   CS_GPIO);
-  UDP_LOGWARN1(F("INT:"),  INT_GPIO);
-  UDP_LOGWARN1(F("SPI Clock (MHz):"), SPI_CLOCK_MHZ);
-  UDP_LOGWARN(F("========================="));
-
-  ///////////////////////////////////
-
-  // To be called before ETH.begin()
-  ESP32_W5500_onEvent();
-
-  // start the ethernet connection and the server:
-  // Use DHCP dynamic IP and random mac
-  uint16_t index = millis() % NUMBER_OF_MAC;
-
-  //bool begin(int MISO_GPIO, int MOSI_GPIO, int SCLK_GPIO, int CS_GPIO, int INT_GPIO, int SPI_CLOCK_MHZ,
-  //           int SPI_HOST, uint8_t *W5500_Mac = W5500_Default_Mac);
-  //ETH.begin( MISO_GPIO, MOSI_GPIO, SCK_GPIO, CS_GPIO, INT_GPIO, SPI_CLOCK_MHZ, ETH_SPI_HOST );
-  ETH.begin( MISO_GPIO, MOSI_GPIO, SCK_GPIO, CS_GPIO, INT_GPIO, SPI_CLOCK_MHZ, ETH_SPI_HOST, mac[index] );
-
-  // Static IP, leave without this line to get IP via DHCP
-  //bool config(IPAddress local_ip, IPAddress gateway, IPAddress subnet, IPAddress dns1 = 0, IPAddress dns2 = 0);
-  //ETH.config(myIP, myGW, mySN, myDNS);
-
-  ESP32_W5500_waitForConnect();
-
-  ///////////////////////////////////
-}
-
-#else
-
-void initEthernet()
-{
-  UDP_LOGWARN(F("Default SPI pinout:"));
-  UDP_LOGWARN1(F("SPI_HOST:"), ETH_SPI_HOST);
-  UDP_LOGWARN1(F("MOSI:"), MOSI_GPIO);
-  UDP_LOGWARN1(F("MISO:"), MISO_GPIO);
-  UDP_LOGWARN1(F("SCK:"),  SCK_GPIO);
-  UDP_LOGWARN1(F("CS:"),   CS_GPIO);
-  UDP_LOGWARN1(F("INT:"),  INT_GPIO);
-  UDP_LOGWARN1(F("SPI Clock (MHz):"), SPI_CLOCK_MHZ);
-  UDP_LOGWARN(F("========================="));
-
-  ///////////////////////////////////
-
-  // To be called before ETH.begin()
-  ESP32_ENC_onEvent();
-
-  // start the ethernet connection and the server:
-  // Use DHCP dynamic IP and random mac
-  uint16_t index = millis() % NUMBER_OF_MAC;
-
-  //bool begin(int MISO_GPIO, int MOSI_GPIO, int SCLK_GPIO, int CS_GPIO, int INT_GPIO, int SPI_CLOCK_MHZ,
-  //           int SPI_HOST, uint8_t *ENC28J60_Mac = ENC28J60_Default_Mac);
-  //ETH.begin( MISO_GPIO, MOSI_GPIO, SCK_GPIO, CS_GPIO, INT_GPIO, SPI_CLOCK_MHZ, ETH_SPI_HOST );
-  ETH.begin( MISO_GPIO, MOSI_GPIO, SCK_GPIO, CS_GPIO, INT_GPIO, SPI_CLOCK_MHZ, ETH_SPI_HOST, mac[index] );
-
-  // Static IP, leave without this line to get IP via DHCP
-  //bool config(IPAddress local_ip, IPAddress gateway, IPAddress subnet, IPAddress dns1 = 0, IPAddress dns2 = 0);
-  //ETH.config(myIP, myGW, mySN, myDNS);
-
-  ESP32_ENC_waitForConnect();
-
-  ///////////////////////////////////
-}
-
-#endif
-
-////////////////////////////////////
-
-void setup()
-{
-  Serial.begin(115200);
-
-  while (!Serial && (millis() < 5000));
-
-  delay(500);
-
-  Serial.print(F("\nStart AsyncUDPSendReceive on "));
-  Serial.print(ARDUINO_BOARD);
-  Serial.print(F(" with "));
-  Serial.println(SHIELD_TYPE);
-
-#if USING_W5500
-  Serial.println(WEBSERVER_ESP32_SC_W5500_VERSION);
-#else
-  Serial.println(WEBSERVER_ESP32_SC_ENC_VERSION);
-#endif
-  
-  Serial.println(ASYNC_UDP_ESP32_SC_ETHERNET_VERSION);
-
-  Serial.setDebugOutput(true);
-
-  ///////////////////////////////////
-
-  initEthernet();
-
-  ///////////////////////////////////
-
-  // Client address
-  Serial.print("AsyncUDPSendReceive started @ IP address: ");
-  Serial.println(ETH.localIP());
-
-  Serial.println(F("\nStarting connection to server..."));
-
-  //NTP requests are to port NTP_REQUEST_PORT = 123
-  if (Udp.connect(timeServerIP, NTP_REQUEST_PORT))
-  {
-    Serial.println("UDP connected");
-
-    Udp.onPacket([](AsyncUDPPacket packet)
-    {
-      parsePacket(packet);
-    });
-  }
-}
-
-void loop()
-{
-  sendNTPPacket();
-
-  // wait 60 seconds before asking for the time again
-  delay(60000);
-}
-```
-
+https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/blob/26082cd8ddf2c252545e595719feb45077534787/examples/AsyncUdpSendReceive/AsyncUdpSendReceive.ino#L11-L376
 
 ---
 ---
 
-### How to connect W5500 or ENC28J60 to ESP32_S2/S3/C3
+### How to connect W5500, W6100 or ENC28J60 to ESP32_S2/S3/C3
 
 
 ##### W5500
@@ -658,6 +304,18 @@ void loop()
 <p align="center">
     <img src="https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/raw/main/Images/W5500_small.png">
 </p> 
+ 
+
+---
+
+##### W6100
+
+`FULL_DUPLEX, 100Mbps`
+
+<p align="center">
+    <img src="https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/raw/main/Images/W6100.png">
+</p>
+
  
 ---
 
@@ -687,12 +345,12 @@ You can change the `INT` pin to another one. Default is `GPIO4`
 #define INT_GPIO            4
 ```
 
-|W5500 or ENC28J60|<--->|ESP32_S3|
+|W5500, W6100 or ENC28J60|<--->|ESP32_S3|
 |:-:|:-:|:-:|
 |MOSI|<--->|GPIO11|
 |MISO|<--->|GPIO13|
 |SCK|<--->|GPIO12|
-|SS|<--->|GPIO10|
+|CS/SS|<--->|GPIO10|
 |INT|<--->|GPIO4|
 |RST|<--->|RST|
 |GND|<--->|GND|
@@ -716,12 +374,12 @@ You can change the `INT` pin to another one. Default is `GPIO4`
 #define INT_GPIO            4
 ```
 
-|W5500 or ENC28J60|<--->|ESP32_S2|
+|W5500, W6100 or ENC28J60|<--->|ESP32_S2|
 |:-:|:-:|:-:|
 |MOSI|<--->|GPIO35|
 |MISO|<--->|GPIO37|
 |SCK|<--->|GPIO36|
-|SS|<--->|GPIO34|
+|CS/SS|<--->|GPIO34|
 |INT|<--->|GPIO4|
 |RST|<--->|RST|
 |GND|<--->|GND|
@@ -744,12 +402,12 @@ You can change the `INT` pin to another one. Default is `GPIO4`
 #define INT_GPIO            10
 ```
 
-|W5500 or ENC28J60|<--->|ESP32_C3|
+|W5500, W6100 or ENC28J60|<--->|ESP32_C3|
 |:-:|:-:|:-:|
 |MOSI|<--->|GPIO6|
 |MISO|<--->|GPIO5|
 |SCK|<--->|GPIO4|
-|SS|<--->|GPIO7|
+|CS/SS|<--->|GPIO7|
 |INT|<--->|GPIO10|
 |RST|<--->|RST|
 |GND|<--->|GND|
@@ -775,7 +433,7 @@ You can change the `INT` pin to another one. Default is `GPIO4`
 
 #### File [AsyncUdpNTPClient.ino](examples/AsyncUdpNTPClient/AsyncUdpNTPClient.ino)
 
-https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/blob/1540dafc72a7596490d1ac9b8a3e77bdeb7df584/examples/AsyncUdpNTPClient/AsyncUdpNTPClient.ino#L11-L356
+https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/blob/26082cd8ddf2c252545e595719feb45077534787/examples/AsyncUdpNTPClient/AsyncUdpNTPClient.ino#L11-L358
 
 ---
 
@@ -789,8 +447,8 @@ This is terminal debug output when running [AsyncUdpNTPClient](https://github.co
 
 ```cpp
 Start AsyncUdpNTPClient on ESP32S3_DEV with ESP32_S3_W5500
-WebServer_ESP32_SC_W5500 v1.2.0 for core v2.0.0+
-AsyncUDP_ESP32_SC_Ethernet v2.1.0 for core v2.0.0+
+WebServer_ESP32_SC_W5500 v1.2.1 for core v2.0.0+
+AsyncUDP_ESP32_SC_Ethernet v2.2.0 for core v2.0.0+
 [UDP] Default SPI pinout:
 [UDP] SPI_HOST: 2
 [UDP] MOSI: 11
@@ -803,28 +461,16 @@ AsyncUDP_ESP32_SC_Ethernet v2.1.0 for core v2.0.0+
 
 ETH Started
 ETH Connected
-ETH MAC: DE:AD:BE:EF:BE:0C, IPv4: 192.168.2.117
+ETH MAC: DE:AD:BE:EF:BE:0C, IPv4: 192.168.2.34
 FULL_DUPLEX, 100Mbps
-AsyncUdpNTPClient started @ IP address: 192.168.2.117
+AsyncUdpNTPClient started @ IP address: 192.168.2.34
 UDP connected
 ============= createNTPpacket =============
 Received UDP Packet Type: Unicast
-From: 208.81.1.244:123, To: 192.168.2.117:56625, Length: 48
-Seconds since Jan 1 1900 = 3880397170
-Epoch/Unix time = 1671408370
-The UTC/GMT time is Mon 2022-12-19 00:06:10 GMT
-============= createNTPpacket =============
-Received UDP Packet Type: Unicast
-From: 208.81.1.244:123, To: 192.168.2.117:56625, Length: 48
-Seconds since Jan 1 1900 = 3880397230
-Epoch/Unix time = 1671408430
-The UTC/GMT time is Mon 2022-12-19 00:07:10 GMT
-============= createNTPpacket =============
-Received UDP Packet Type: Unicast
-From: 208.81.1.244:123, To: 192.168.2.117:56625, Length: 48
-Seconds since Jan 1 1900 = 3880397290
-Epoch/Unix time = 1671408490
-The UTC/GMT time is Mon 2022-12-19 00:08:10 GMT
+From: 208.81.1.244:123, To: 192.168.2.34:55314, Length: 48
+Seconds since Jan 1 1900 = 3882392659
+Epoch/Unix time = 1673403859
+The UTC/GMT time is Wed 2023-01-11 02:24:19 GMT
 ```
 
 
@@ -837,8 +483,8 @@ This is terminal debug output when running [AsyncUDPSendReceive](https://github.
 
 ```cpp
 Start AsyncUDPSendReceive on ESP32S3_DEV with ESP32_S3_W5500
-WebServer_ESP32_SC_W5500 v1.2.0 for core v2.0.0+
-AsyncUDP_ESP32_SC_Ethernet v2.1.0 for core v2.0.0+
+WebServer_ESP32_SC_W5500 v1.2.1 for core v2.0.0+
+AsyncUDP_ESP32_SC_Ethernet v2.2.0 for core v2.0.0+
 
 [UDP] Default SPI pinout:
 [UDP] SPI_HOST: 2
@@ -852,18 +498,18 @@ AsyncUDP_ESP32_SC_Ethernet v2.1.0 for core v2.0.0+
 
 ETH Started
 ETH Connected
-ETH MAC: DE:AD:BE:EF:FE:11, IPv4: 192.168.2.101
+ETH MAC: DE:AD:BE:EF:FE:11, IPv4: 192.168.2.34
 FULL_DUPLEX, 100Mbps
-AsyncUDPSendReceive started @ IP address: 192.168.2.101
+AsyncUDPSendReceive started @ IP address: 192.168.2.34
 
 Starting connection to server...
 UDP connected
 ============= createNTPpacket =============
 Received UDP Packet Type: Unicast
-From: 208.81.1.244:123, To: 192.168.2.117:56625, Length: 48
-Seconds since Jan 1 1900 = 3880397350
-Epoch/Unix time = 1671408550
-The UTC/GMT time is Mon 2022-12-19 00:09:10 GMT
+From: 208.81.1.244:123, To: 192.168.2.34:62164, Length: 48
+Seconds since Jan 1 1900 = 3882392738
+Epoch/Unix time = 1673403938
+The UTC/GMT time is Wed 2023-01-11 02:25:38 GMT
 ============= sendACKPacket =============
 ```
 
@@ -879,7 +525,7 @@ This is terminal debug output when running [AsyncUdpNTPClient](https://github.co
 ```cpp
 Start AsyncUdpNTPClient on ESP32S3_DEV with ESP32_S3_ENC28J60
 WebServer_ESP32_SC_ENC v1.2.0 for core v2.0.0+
-AsyncUDP_ESP32_SC_Ethernet v2.1.0 for core v2.0.0+
+AsyncUDP_ESP32_SC_Ethernet v2.2.0 for core v2.0.0+
 [UDP] Default SPI pinout:
 [UDP] SPI_HOST: 1
 [UDP] MOSI: 11
@@ -892,16 +538,16 @@ AsyncUDP_ESP32_SC_Ethernet v2.1.0 for core v2.0.0+
 
 ETH Started
 ETH Connected
-ETH MAC: DE:AD:BE:EF:FE:0F, IPv4: 192.168.2.113
+ETH MAC: DE:AD:BE:EF:FE:0F, IPv4: 192.168.2.34
 FULL_DUPLEX, 10Mbps
-AsyncUdpNTPClient started @ IP address: 192.168.2.113
+AsyncUdpNTPClient started @ IP address: 192.168.2.34
 UDP connected
 ============= createNTPpacket =============
 Received UDP Packet Type: Unicast
-From: 208.81.1.244:123, To: 192.168.2.113:52005, Length: 48
-Seconds since Jan 1 1900 = 3880397855
-Epoch/Unix time = 1671409055
-The UTC/GMT time is Mon 2022-12-19 00:17:35 GMT
+From: 208.81.1.244:123, To: 192.168.2.34:62164, Length: 48
+Seconds since Jan 1 1900 = 3882392857
+Epoch/Unix time = 1673404057
+The UTC/GMT time is Wed 2023-01-11 02:27:37 GMT
 ```
 
 
@@ -915,7 +561,7 @@ This is terminal debug output when running [AsyncUDPSendReceive](https://github.
 ```cpp
 Start AsyncUDPSendReceive on ESP32S3_DEV with ESP32_S3_ENC28J60
 WebServer_ESP32_SC_ENC v1.2.0 for core v2.0.0+
-AsyncUDP_ESP32_SC_Ethernet v2.1.0 for core v2.0.0+
+AsyncUDP_ESP32_SC_Ethernet v2.2.0 for core v2.0.0+
 [UDP] Default SPI pinout:
 [UDP] SPI_HOST: 1
 [UDP] MOSI: 11
@@ -928,25 +574,18 @@ AsyncUDP_ESP32_SC_Ethernet v2.1.0 for core v2.0.0+
 
 ETH Started
 ETH Connected
-ETH MAC: DE:AD:BE:EF:FE:0F, IPv4: 192.168.2.113
+ETH MAC: DE:AD:BE:EF:FE:0F, IPv4: 192.168.2.34
 FULL_DUPLEX, 10Mbps
-AsyncUDPSendReceive started @ IP address: 192.168.2.113
+AsyncUDPSendReceive started @ IP address: 192.168.2.34
 
 Starting connection to server...
 UDP connected
 ============= createNTPpacket =============
 Received UDP Packet Type: Unicast
-From: 208.81.1.244:123, To: 192.168.2.113:50181, Length: 48
-Seconds since Jan 1 1900 = 3880397552
-Epoch/Unix time = 1671408752
-The UTC/GMT time is Mon 2022-12-19 00:12:32 GMT
-============= sendACKPacket =============
-============= createNTPpacket =============
-Received UDP Packet Type: Unicast
-From: 208.81.1.244:123, To: 192.168.2.113:50181, Length: 48
-Seconds since Jan 1 1900 = 3880397612
-Epoch/Unix time = 1671408812
-The UTC/GMT time is Mon 2022-12-19 00:13:32 GMT
+From: 208.81.1.244:123, To: 192.168.2.34:62164, Length: 48
+Seconds since Jan 1 1900 = 3882392738
+Epoch/Unix time = 1673403938
+The UTC/GMT time is Wed 2023-01-11 02:25:38 GMT
 ============= sendACKPacket =============
 ```
 
@@ -963,7 +602,7 @@ This is terminal debug output when running [AsyncUdpNTPClient](https://github.co
 ```cpp
 Start AsyncUdpNTPClient on ESP32C3_DEV with ESP32_C3_ENC28J60
 WebServer_ESP32_SC_ENC v1.2.0 for core v2.0.0+
-AsyncUDP_ESP32_SC_Ethernet v2.1.0 for core v2.0.0+
+AsyncUDP_ESP32_SC_Ethernet v2.2.0 for core v2.0.0+
 [UDP] Default SPI pinout:
 [UDP] SPI_HOST: 1
 [UDP] MOSI: 6
@@ -977,22 +616,16 @@ Using built-in mac_eth = 7C:DF:A1:DA:66:87
 
 ETH Started
 ETH Connected
-ETH MAC: 7C:DF:A1:DA:66:87, IPv4: 192.168.2.136
+ETH MAC: 7C:DF:A1:DA:66:87, IPv4: 192.168.2.134
 FULL_DUPLEX, 10Mbps
-AsyncUdpNTPClient started @ IP address: 192.168.2.136
+AsyncUdpNTPClient started @ IP address: 192.168.2.134
 UDP connected
 ============= createNTPpacket =============
 Received UDP Packet Type: Unicast
-From: 208.81.1.244:123, To: 192.168.2.136:60970, Length: 48
-Seconds since Jan 1 1900 = 3880661204
-Epoch/Unix time = 1671672404
-The UTC/GMT time is Thu 2022-12-22 01:26:44 GMT
-============= createNTPpacket =============
-Received UDP Packet Type: Unicast
-From: 208.81.1.244:123, To: 192.168.2.136:60970, Length: 48
-Seconds since Jan 1 1900 = 3880661264
-Epoch/Unix time = 1671672464
-The UTC/GMT time is Thu 2022-12-22 01:27:44 GMT
+From: 208.81.1.244:123, To: 192.168.2.134:62164, Length: 48
+Seconds since Jan 1 1900 = 3882392857
+Epoch/Unix time = 1673404057
+The UTC/GMT time is Wed 2023-01-11 02:27:37 GMT
 ```
 
 
@@ -1007,8 +640,8 @@ This is terminal debug output when running [AsyncUdpNTPClient](https://github.co
 
 ```cpp
 Start AsyncUdpNTPClient on ESP32S2_DEV with ESP32_S2_W5500
-WebServer_ESP32_SC_W5500 v1.2.0 for core v2.0.0+
-AsyncUDP_ESP32_SC_Ethernet v2.1.0 for core v2.0.0+
+WebServer_ESP32_SC_W5500 v1.2.1 for core v2.0.0+
+AsyncUDP_ESP32_SC_Ethernet v2.2.0 for core v2.0.0+
 [UDP] Default SPI pinout:
 [UDP] SPI_HOST: 2
 [UDP] MOSI: 35
@@ -1022,22 +655,54 @@ Using built-in mac_eth = 7E:DF:A1:08:32:C9
 
 ETH Started
 ETH Connected
-ETH MAC: 7E:DF:A1:08:32:C9, IPv4: 192.168.2.133
+ETH MAC: 7E:DF:A1:08:32:C9, IPv4: 192.168.2.36
 FULL_DUPLEX, 100Mbps
-AsyncUdpNTPClient started @ IP address: 192.168.2.133
+AsyncUdpNTPClient started @ IP address: 192.168.2.36
 UDP connected
 ============= createNTPpacket =============
 Received UDP Packet Type: Unicast
-From: 208.81.1.244:123, To: 192.168.2.133:53072, Length: 48
-Seconds since Jan 1 1900 = 3880661469
-Epoch/Unix time = 1671672669
-The UTC/GMT time is Thu 2022-12-22 01:31:09 GMT
+From: 208.81.1.244:123, To: 192.168.2.36:55314, Length: 48
+Seconds since Jan 1 1900 = 3882392659
+Epoch/Unix time = 1673403859
+The UTC/GMT time is Wed 2023-01-11 02:24:19 GMT
+```
+
+---
+
+
+#### 7. AsyncUdpNTPClient on ESP32S2_DEV with ESP32_S2_W6100
+
+This is terminal debug output when running [AsyncUdpNTPClient](https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/tree/main/examples/AsyncUdpNTPClient) on  **ESP32_S2_W6100 (ESP32S2_DEV + W6100)**. It connects to NTP Server using `AsyncUDP_ESP32_SC_Ethernet` library, and requests NTP time every 60s. The packet is then **received and processed asynchronously** to print current UTC/GMT time.
+
+##### Connect to NTP server 0.ca.pool.ntp.org (IP=208.81.1.244)
+
+```cpp
+Start AsyncUdpNTPClient on ESP32S2_DEV with ESP32_S2_W5500
+WebServer_ESP32_SC_W6100 v1.2.1 for core v2.0.0+
+AsyncUDP_ESP32_SC_Ethernet v2.2.0 for core v2.0.0+
+[UDP] Default SPI pinout:
+[UDP] SPI_HOST: 2
+[UDP] MOSI: 35
+[UDP] MISO: 37
+[UDP] SCK: 36
+[UDP] CS: 34
+[UDP] INT: 4
+[UDP] SPI Clock (MHz): 25
+[UDP] =========================
+Using built-in mac_eth = 7E:DF:A1:08:32:C9
+
+ETH Started
+ETH Connected
+ETH MAC: 7E:DF:A1:08:32:C9, IPv4: 192.168.2.36
+FULL_DUPLEX, 100Mbps
+AsyncUdpNTPClient started @ IP address: 192.168.2.36
+UDP connected
 ============= createNTPpacket =============
 Received UDP Packet Type: Unicast
-From: 208.81.1.244:123, To: 192.168.2.133:53072, Length: 48
-Seconds since Jan 1 1900 = 3880661529
-Epoch/Unix time = 1671672729
-The UTC/GMT time is Thu 2022-12-22 01:32:09 GMT
+From: 208.81.1.244:123, To: 192.168.2.36:55314, Length: 48
+Seconds since Jan 1 1900 = 3882392659
+Epoch/Unix time = 1673403859
+The UTC/GMT time is Wed 2023-01-11 02:24:19 GMT
 ```
 
 
@@ -1069,9 +734,9 @@ You can also change the debugging level from 0 to 4
 
 ### Troubleshooting
 
-If you get compilation errors, more often than not, you may need to install a newer version of Arduino IDE, the Arduino `ESP32` core or depending libraries.
+If you get compilation errors, more often than not, you may need to install a newer version of Arduino IDE, the [Arduino `ESP32`](https://github.com/espressif/arduino-esp32) core or depending libraries.
 
-Sometimes, the library will only work if you update the `ESP32` core to the latest version because I am always using the latest cores /libraries.
+Sometimes, the library will only work if you update the [`ESP32`](https://github.com/espressif/arduino-esp32) core to the latest and stable version because I am always using the latest stable cores/libraries.
 
 ---
 ---
@@ -1091,9 +756,10 @@ Submit issues to: [AsyncUDP_ESP32_SC_Ethernet issues](https://github.com/khoih-p
 
 ## DONE
 
- 1. Initial port to `ESP32_S3` boards using `LwIP W5500 or ENC28J60 Ethernet`
+ 1. Initial port to `ESP32_S3` boards using `LwIP W5500, W6100 or ENC28J60 Ethernet`
  2. Use `allman astyle` and add `utils`. Restyle the library
- 3. Add support to `ESP32_S2` and `ESP32_C3` using `LwIP W5500 or ENC28J60 Ethernet`
+ 3. Add support to `ESP32_S2` and `ESP32_C3` using `LwIP W5500, W6100 or ENC28J60 Ethernet`
+ 4. Add support to `ESP32_S2/S3/C3` using `LwIP W6100 Ethernet`
  
 ---
 ---
@@ -1106,7 +772,6 @@ Submit issues to: [AsyncUDP_ESP32_SC_Ethernet issues](https://github.com/khoih-p
   <tr>
     <td align="center"><a href="https://github.com/me-no-dev"><img src="https://github.com/me-no-dev.png" width="100px;" alt="me-no-dev"/><br /><sub><b>⭐️⭐️ Hristo Gochkov</b></sub></a><br /></td>
   </tr>
-  </tr> 
 </table>
 
 ---
