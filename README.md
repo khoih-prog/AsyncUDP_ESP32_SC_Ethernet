@@ -173,8 +173,9 @@ using `LwIP` W5500, W6100 or ENC28J60 Ethernet
 
  1. [`Arduino IDE 1.8.19+` for Arduino](https://www.arduino.cc/en/Main/Software)
  2. [`ESP32 Core 2.0.5+`](https://github.com/espressif/arduino-esp32) for ESP32-based boards. [![Latest release](https://img.shields.io/github/release/espressif/arduino-esp32.svg)](https://github.com/espressif/arduino-esp32/releases/latest/)
- 3. [`WebServer_ESP32_SC_W5500 library 1.2.0+`](https://github.com/khoih-prog/WebServer_ESP32_SC_W5500). To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebServer_ESP32_SC_W5500.svg?)](https://www.ardu-badge.com/WebServer_ESP32_SC_W5500)
- 4. [`WebServer_ESP32_SC_ENC library 1.2.0+`](https://github.com/khoih-prog/WebServer_ESP32_SC_ENC). To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebServer_ESP32_SC_ENC.svg?)](https://www.ardu-badge.com/WebServer_ESP32_SC_ENC)
+ 3. [`WebServer_ESP32_SC_W5500 library 1.2.1+`](https://github.com/khoih-prog/WebServer_ESP32_SC_W5500). To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebServer_ESP32_SC_W5500.svg?)](https://www.ardu-badge.com/WebServer_ESP32_SC_W5500)
+ 4. [`WebServer_ESP32_SC_W6100 library 1.2.1+`](https://github.com/khoih-prog/WebServer_ESP32_SC_W6100). To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebServer_ESP32_SC_W6100.svg?)](https://www.ardu-badge.com/WebServer_ESP32_SC_W6100)
+ 5. [`WebServer_ESP32_SC_ENC library 1.2.0+`](https://github.com/khoih-prog/WebServer_ESP32_SC_ENC). To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebServer_ESP32_SC_ENC.svg?)](https://www.ardu-badge.com/WebServer_ESP32_SC_ENC)
  
  
 ---
@@ -285,7 +286,7 @@ Look in file [**adc_common.c**](https://github.com/espressif/esp-idf/blob/master
 
 ## HOWTO Setting up the Async UDP Client
 
-https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/blob/26082cd8ddf2c252545e595719feb45077534787/examples/AsyncUdpSendReceive/AsyncUdpSendReceive.ino#L11-L376
+https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/blob/854d1aab39b2f7dac9f406d1b09b8411ed3e36cc/examples/AsyncUdpSendReceive/AsyncUdpSendReceive.ino#L11-L375
 
 ---
 ---
@@ -433,7 +434,7 @@ You can change the `INT` pin to another one. Default is `GPIO4`
 
 #### File [AsyncUdpNTPClient.ino](examples/AsyncUdpNTPClient/AsyncUdpNTPClient.ino)
 
-https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/blob/26082cd8ddf2c252545e595719feb45077534787/examples/AsyncUdpNTPClient/AsyncUdpNTPClient.ino#L11-L358
+https://github.com/khoih-prog/AsyncUDP_ESP32_SC_Ethernet/blob/854d1aab39b2f7dac9f406d1b09b8411ed3e36cc/examples/AsyncUdpNTPClient/AsyncUdpNTPClient.ino#L11-L357
 
 ---
 
