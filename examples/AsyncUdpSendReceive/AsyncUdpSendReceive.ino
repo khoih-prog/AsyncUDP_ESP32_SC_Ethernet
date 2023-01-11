@@ -15,8 +15,8 @@
 #include <Arduino.h>
 
 #define USING_W5100           false
-#define USING_W6100           true
-#define USING_ENC28J60        false
+#define USING_W6100           false
+#define USING_ENC28J60        true
 
 #if !USING_W5500 && !USING_W6100 && !USING_ENC28J60
   #undef USING_W5500
@@ -108,7 +108,6 @@
 
   #define ESP32_Ethernet_onEvent            ESP32_ENC_onEvent
   #define ESP32_Ethernet_waitForConnect     ESP32_ENC_waitForConnect
-  #define ETH_SPI_HOST                      SPI_HOST
 
   // Optional values to override default settings
   // Don't change unless you know what you're doing

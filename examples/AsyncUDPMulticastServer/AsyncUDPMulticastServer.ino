@@ -108,7 +108,6 @@
 
   #define ESP32_Ethernet_onEvent            ESP32_ENC_onEvent
   #define ESP32_Ethernet_waitForConnect     ESP32_ENC_waitForConnect
-  #define ETH_SPI_HOST                      SPI_HOST
 
   // Optional values to override default settings
   // Don't change unless you know what you're doing
